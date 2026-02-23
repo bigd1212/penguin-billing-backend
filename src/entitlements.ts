@@ -1,5 +1,5 @@
 import { config } from "./config.js";
-import type { EntitlementSnapshot, MonetizationTier, PurchaseRow } from "./types.js";
+import type { EntitlementSnapshot, FeatureCapability, MonetizationTier, PurchaseRow } from "./types.js";
 
 const ACTIVE_STATES = new Set(["ACTIVE", "GRACE_PERIOD"]);
 
@@ -19,6 +19,7 @@ export function resolveEntitlements(input: {
       tier: "FREE",
       adsEnabled: true,
       proToolsEnabled: false,
+      capabilities: capabilitiesForTier("FREE"),
       validUntilEpochMs: null,
       source: "LOCAL_DEFAULT"
     };
@@ -38,9 +39,15 @@ export function resolveEntitlements(input: {
     tier,
     adsEnabled: tier === "FREE",
     proToolsEnabled: tier === "PRO",
+    capabilities: capabilitiesForTier(tier),
     validUntilEpochMs,
     source: "BACKEND_VERIFIED"
   };
+}
+
+function capabilitiesForTier(tier: MonetizationTier): FeatureCapability[] {
+  if (tier !== "PRO") return [];
+  return ["OCR_SEARCHABLE_TEXT", "TTS_READ_ALOUD"];
 }
 
 function productToTier(productId: string): MonetizationTier {

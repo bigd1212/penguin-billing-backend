@@ -9,6 +9,7 @@ Separate backend repo for PenguinPDF Android monetization.
 - `POST /v1/rtdn/google-play` (Google Play RTDN intake)
 - PostgreSQL persistence for Play purchase state
 - Entitlement resolution (`FREE`, `PLUS`, `PRO`)
+- Capability flags (`OCR_SEARCHABLE_TEXT`, `TTS_READ_ALOUD`)
 
 ## Stack
 

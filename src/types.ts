@@ -8,6 +8,7 @@ export type AccessState =
 
 export type MonetizationTier = "FREE" | "PLUS" | "PRO";
 export type EntitlementSource = "LOCAL_DEFAULT" | "BACKEND_VERIFIED";
+export type FeatureCapability = "OCR_SEARCHABLE_TEXT" | "TTS_READ_ALOUD";
 
 export interface PurchaseRow {
   purchaseToken: string;
@@ -26,6 +27,7 @@ export interface EntitlementSnapshot {
   tier: MonetizationTier;
   adsEnabled: boolean;
   proToolsEnabled: boolean;
+  capabilities: FeatureCapability[];
   validUntilEpochMs: number | null;
   source: EntitlementSource;
 }
